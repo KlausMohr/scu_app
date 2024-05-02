@@ -5,7 +5,7 @@ import 'package:scu_app/data/models/vehicle_model.dart';
 import 'package:http/http.dart' as http;
 
 class HttpVehicleRepository {
-  Future<List<VehicleModel?>> getAll() async {
+  Future<List<VehicleModel>> getAll() async {
     try {
       Uri uri = Uri.http('localhost:18080', '/vehicles');
 

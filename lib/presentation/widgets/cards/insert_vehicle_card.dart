@@ -2,14 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:scu_app/data/implementatios/vehicle_repository.dart';
 import 'package:scu_app/data/models/vehicle_model.dart';
-import 'package:scu_app/presentation/business_logic/bloc/vehicle_list/vehicle_list_bloc.dart';
+
 import 'package:scu_app/presentation/utils/tags_vehicles_hero.dart';
 
 class VehicleInsertCard extends StatelessWidget {
   BoxConstraints constraints;
-  final VehicleListBloc bloc;
 
-  VehicleInsertCard({required this.constraints, required this.bloc, super.key});
+  VehicleInsertCard({required this.constraints, super.key});
 
   @override
   Widget build(BuildContext context) {

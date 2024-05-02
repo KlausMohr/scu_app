@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:scu_app/presentation/builders/future_builders/vehicle_list_builder.dart';
-import 'package:scu_app/presentation/business_logic/bloc/vehicle_list/vehicle_list_bloc.dart';
+import 'package:scu_app/presentation/business_logic/vehicle/bloc/vehicle_bloc.dart';
 import 'package:scu_app/presentation/widgets/cards/insert_vehicle_card.dart';
 
 class Homescreen extends StatefulWidget {
@@ -12,21 +13,6 @@ class Homescreen extends StatefulWidget {
 }
 
 class _HomescreenState extends State<Homescreen> {
-  late final VehicleListBloc bloc;
-
-  @override
-  void initState() {
-    super.initState();
-    bloc = VehicleListBloc();
-    bloc.inputVehicle.add(GetVehicle());
-  }
-
-  @override
-  void dispose() {
-    bloc.inputVehicle.close();
-    super.dispose();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,12 +26,12 @@ class _HomescreenState extends State<Homescreen> {
               child: Column(
                 children: [
                   VehicleInsertCard(
-                    bloc: bloc,
                     constraints: constraints,
                   ),
                   const MaxGap(25),
-                  VehicleBuilder(
-                    bloc: bloc,
+                  BlocProvider(
+                    create: (_) => VehicleBloc()..add(VehicleFetched()),
+                    child: VehicleBuilder(),
                   ),
                 ],
               ),
