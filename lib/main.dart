@@ -1,7 +1,11 @@
+import "package:bloc/bloc.dart";
 import "package:flutter/material.dart";
-import "package:scu_app/presentation/homescreen.dart";
+import "package:scu_app/vehicle_observer.dart";
+import "presentation/homescreen.dart";
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  Bloc.observer = const VehicleObserver();
   runApp(const ScuApp());
 }
 
@@ -11,8 +15,9 @@ class ScuApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        darkTheme: ThemeData.dark(),
-        home: const Homescreen());
+      debugShowCheckedModeBanner: false,
+      darkTheme: ThemeData.dark(),
+      home: const Homescreen(),
+    );
   }
 }
