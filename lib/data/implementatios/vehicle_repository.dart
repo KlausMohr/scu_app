@@ -34,7 +34,7 @@ class HttpVehicleRepository {
     throw UnimplementedError();
   }
 
-  static Future<void> insert(VehicleModel vehicle) async {
+  Future<void> insert(VehicleModel vehicle) async {
     const url = 'http://localhost:18080/vehicles/insert';
     var vehicleObj = vehicle.toJson();
     var headers = {
@@ -47,9 +47,16 @@ class HttpVehicleRepository {
     log(response.toString());
   }
 
-  void delete(int id) {
-    // TODO: implement delete
-    throw UnimplementedError();
+  Future<void> delete(int id) async {
+    Uri uri = Uri.http('localhost:18080', '/vehicles/$id');
+
+    final response = await http.delete(uri);
+    response;
+    if (response.statusCode == 200) {
+      log("Veículo excluido com sucesso");
+    } else {
+      log("Falha ao remover veículo");
+    }
   }
 
   void update(int id) {

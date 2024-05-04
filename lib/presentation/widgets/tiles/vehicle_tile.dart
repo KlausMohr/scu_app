@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:scu_app/data/models/vehicle_model.dart';
+import 'package:scu_app/presentation/business_logic/vehicle/bloc/vehicle_bloc.dart';
 
 class VehicleTile extends StatelessWidget {
   final VehicleModel? vehicle;
@@ -23,7 +25,9 @@ class VehicleTile extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             IconButton(
-              onPressed: () {},
+              onPressed: () {
+                context.read<VehicleBloc>().add(VehicleRemoved(vehicle!.id!));
+              },
               icon: const Icon(Icons.delete),
             ),
           ],

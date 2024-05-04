@@ -6,29 +6,31 @@ final class VehicleState extends Equatable {
   const VehicleState({
     this.status = VehicleStatus.initial,
     this.vehicles = const <VehicleModel>[],
-    this.hasReachedMax = false,
+    this.lastRemovedVehicle,
   });
 
   final VehicleStatus status;
   final List<VehicleModel> vehicles;
-  final bool hasReachedMax;
+  final int? lastRemovedVehicle;
 
   VehicleState copyWith({
     VehicleStatus? status,
     List<VehicleModel>? vehicles,
-    bool? hasReachedMax,
+    int? Function()? lastRemovedVehicle,
   }) {
     return VehicleState(
         status: status ?? this.status,
         vehicles: vehicles ?? this.vehicles,
-        hasReachedMax: hasReachedMax ?? this.hasReachedMax);
+        lastRemovedVehicle: lastRemovedVehicle != null
+            ? lastRemovedVehicle()
+            : this.lastRemovedVehicle);
   }
 
   @override
   String toString() {
-    return '''VehicleState { status: $status, hasReachedMax: $hasReachedMax, vehicles: ${vehicles.length}}''';
+    return '''VehicleState { status: $status, lastRemovedVehicle: $lastRemovedVehicle, vehicles: ${vehicles.length}}''';
   }
 
   @override
-  List<Object> get props => [status, vehicles, hasReachedMax];
+  List<Object> get props => [status, vehicles];
 }

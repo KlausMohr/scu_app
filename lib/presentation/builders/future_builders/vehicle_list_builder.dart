@@ -4,20 +4,25 @@ import 'package:scu_app/presentation/business_logic/vehicle/bloc/vehicle_bloc.da
 import 'package:scu_app/presentation/widgets/tiles/vehicle_tile.dart';
 
 class VehicleBuilder extends StatefulWidget {
-  const VehicleBuilder({super.key});
+  VehicleBuilder({super.key});
 
   @override
   State<VehicleBuilder> createState() => _VehicleBuilderState();
 }
 
 class _VehicleBuilderState extends State<VehicleBuilder> {
+  late final VehicleBloc bloc;
+
   @override
   void initState() {
     super.initState();
+    bloc = VehicleBloc();
+    bloc.add(VehicleFetched());
   }
 
   @override
   void dispose() {
+    bloc.close();
     super.dispose();
   }
 
