@@ -1,8 +1,6 @@
-import 'package:equatable/equatable.dart';
-
 // ignore_for_file: unnecessary_this
 // ignore: must_be_immutable
-class VehicleModel extends Equatable {
+class VehicleModel {
   int? id;
   String? make;
   String? model;
@@ -44,8 +42,4 @@ class VehicleModel extends Equatable {
     this.mileage = json["mileage"] ?? "";
     this.licenseplt = json["licenseplt"] ?? "";
   }
-
-  @override
-  List<Object?> get props =>
-      [id, make, model, year, color, vin, mileage, licenseplt];
 }

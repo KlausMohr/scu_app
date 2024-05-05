@@ -16,35 +16,35 @@ class VehicleBloc extends Bloc<VehicleEvent, VehicleState> {
 
   Future<void> _onVehicleFetched(
       VehicleFetched event, Emitter<VehicleState> emit) async {
-    try {
-      if (state.status == VehicleStatus.initial) {
-        final vehicles = await vehicleRepo.getAll();
-        return emit(state.copyWith(
-          status: VehicleStatus.success,
-          vehicles: vehicles,
-        ));
-      }
+    if (state.status == VehicleStatus.initial) {
       final vehicles = await vehicleRepo.getAll();
-      emit(state.copyWith(
+      return emit(state.copyWith(
         status: VehicleStatus.success,
-        vehicles: List.of(state.vehicles)..addAll(vehicles),
+        vehicles: vehicles,
       ));
-    } catch (_) {
-      emit(state.copyWith(status: VehicleStatus.failure));
     }
+    final vehicles = await vehicleRepo.getAll();
+    emit(vehicles.isEmpty
+        ? state.copyWith(
+            status: VehicleStatus.success,
+            vehicles: List.of(state.vehicles)..addAll(vehicles),
+          )
+        : state);
   }
 
   Future<void> _onVehicleRemoved(
     VehicleRemoved event,
     Emitter<VehicleState> emit,
   ) async {
-    emit(state.copyWith(lastRemovedVehicle: () => event.id));
     await vehicleRepo.delete(event.id);
+    final vehicles = await vehicleRepo.getAll();
+    emit(state.copyWith(status: VehicleStatus.success, vehicles: vehicles));
   }
 
   Future<void> _onVehicleInsert(
       VehicleInsert event, Emitter<VehicleState> emit) async {
-    emit(state.copyWith());
     await vehicleRepo.insert(event.vehicle);
+    final vehicles = await vehicleRepo.getAll();
+    emit(state.copyWith(status: VehicleStatus.success, vehicles: vehicles));
   }
 }

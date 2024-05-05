@@ -8,12 +8,9 @@ sealed class VehicleEvent extends Equatable {
 final class VehicleFetched extends VehicleEvent {}
 
 final class VehicleRemoved extends VehicleEvent {
-  VehicleRemoved(this.id);
-
   final int id;
 
-  @override
-  List<Object> get props => [id];
+  VehicleRemoved(this.id);
 }
 
 // ignore: must_be_immutable

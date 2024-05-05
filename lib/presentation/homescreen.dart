@@ -1,21 +1,32 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
-import 'package:scu_app/presentation/builders/future_builders/vehicle_list_builder.dart';
+import 'package:scu_app/presentation/builders/bloc_builder/vehicle_list_builder.dart';
 import 'package:scu_app/presentation/business_logic/vehicle/bloc/vehicle_bloc.dart';
 import 'package:scu_app/presentation/widgets/cards/insert_vehicle_card.dart';
 
 class Homescreen extends StatefulWidget {
-  Homescreen({super.key});
+  const Homescreen({super.key});
 
   @override
   State<Homescreen> createState() => _HomescreenState();
 }
 
 class _HomescreenState extends State<Homescreen> {
-  final VehicleBloc bloc = VehicleBloc();
+  late final VehicleBloc bloc;
+
+  @override
+  void initState() {
+    super.initState();
+    bloc = VehicleBloc();
+    bloc.add(VehicleFetched());
+  }
+
+  @override
+  void dispose() {
+    bloc.close();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,12 +47,9 @@ class _HomescreenState extends State<Homescreen> {
                     ),
                     const MaxGap(25),
                     Flexible(
-                      child: BlocProvider(
-                        create: (context) =>
-                            VehicleBloc()..add(VehicleFetched()),
-                        child: VehicleBuilder(),
-                      ),
-                    ),
+                        child: VehicleBuilder(
+                      bloc: bloc,
+                    )),
                   ],
                 ),
               ),

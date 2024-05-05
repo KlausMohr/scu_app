@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:scu_app/data/models/vehicle_model.dart';
 import 'package:scu_app/presentation/business_logic/vehicle/bloc/vehicle_bloc.dart';
 
 class VehicleTile extends StatelessWidget {
   final VehicleModel? vehicle;
-  const VehicleTile({required this.vehicle, super.key});
+  final VehicleBloc bloc;
+  const VehicleTile({required this.vehicle, required this.bloc, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +26,7 @@ class VehicleTile extends StatelessWidget {
           children: [
             IconButton(
               onPressed: () {
-                context.read<VehicleBloc>().add(VehicleRemoved(vehicle!.id!));
+                bloc.add(VehicleRemoved(vehicle!.id!));
               },
               icon: const Icon(Icons.delete),
             ),
