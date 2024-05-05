@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:scu_app/data/models/vehicle_model.dart';
 import 'package:scu_app/presentation/business_logic/vehicle/bloc/vehicle_bloc.dart';
 
+import 'package:scu_app/presentation/widgets/cards/vehicle_details_card.dart';
+
 class VehicleTile extends StatelessWidget {
-  final VehicleModel? vehicle;
+  final VehicleModel vehicle;
   final VehicleBloc bloc;
   const VehicleTile({required this.vehicle, required this.bloc, super.key});
 
@@ -12,13 +14,22 @@ class VehicleTile extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: ListTile(
-        leading: Text(vehicle!.id.toString()),
+        onTap: () {
+          Navigator.of(context).push(PageRouteBuilder(
+              opaque: false,
+              pageBuilder: (context, animation, secondaryAnimation) {
+                return VehicleDetailCard(
+                  vehicle: vehicle,
+                );
+              }));
+        },
+        leading: Text(vehicle.id.toString()),
         title: Text(
-          vehicle!.make!,
+          vehicle.make!,
           style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
         ),
         subtitle: Text(
-          vehicle!.model!,
+          vehicle.model!,
           style: const TextStyle(fontSize: 18),
         ),
         trailing: Row(
@@ -26,7 +37,7 @@ class VehicleTile extends StatelessWidget {
           children: [
             IconButton(
               onPressed: () {
-                bloc.add(VehicleRemoved(vehicle!.id!));
+                bloc.add(VehicleRemoved(vehicle.id!));
               },
               icon: const Icon(Icons.delete),
             ),
