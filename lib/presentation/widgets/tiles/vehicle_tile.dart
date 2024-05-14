@@ -26,20 +26,35 @@ class VehicleTile extends StatelessWidget {
         leading: Text(vehicle.id.toString()),
         title: Text(
           vehicle.make!,
-          style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+          style: const TextStyle(
+            fontSize: 18,
+          ),
         ),
         subtitle: Text(
           vehicle.model!,
-          style: const TextStyle(fontSize: 18),
+          style: const TextStyle(
+            fontSize: 22,
+            fontWeight: FontWeight.bold,
+          ),
         ),
         trailing: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
+            Text(
+              vehicle.licenseplt.toString(),
+              style: const TextStyle(
+                fontSize: 18,
+              ),
+            ),
             IconButton(
               onPressed: () {
-                bloc.add(VehicleRemoved(vehicle.id!));
+                bloc.add(
+                  VehicleRemoved(vehicle.id!),
+                );
               },
-              icon: const Icon(Icons.delete),
+              icon: const Icon(
+                Icons.delete,
+              ),
             ),
           ],
         ),

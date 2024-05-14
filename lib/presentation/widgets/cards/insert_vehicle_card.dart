@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:gap/gap.dart';
 import 'package:scu_app/data/models/vehicle_model.dart';
 import 'package:scu_app/presentation/business_logic/vehicle/bloc/vehicle_bloc.dart';
@@ -16,15 +18,27 @@ class VehicleInsertCard extends StatelessWidget {
     return Center(
       child: SizedBox(
         height: 50,
-        width: constraints.maxWidth * 0.6,
+        width: constraints.maxWidth * 0.95,
         child: Hero(
           tag: vehicleAdd,
           child: Card(
             child: InkWell(
-              child: const Text(
-                "Lista de veículos",
-                style: TextStyle(fontSize: 22),
-                textAlign: TextAlign.center,
+              child: const Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Expanded(
+                    child: Text(
+                      "Lista de veículos",
+                      style: TextStyle(
+                        fontSize: 22,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                  Icon(
+                    Icons.arrow_drop_down_outlined,
+                  ),
+                ],
               ),
               onTap: () {
                 Navigator.of(context).push(
@@ -69,7 +83,7 @@ class InsertVehicleCard extends StatelessWidget {
           height: constraints.maxHeight * 0.8,
           width: constraints.maxWidth * 0.7,
           child: Material(
-            color: Color.fromARGB(255, 48, 48, 48),
+            color: const Color.fromARGB(255, 228, 228, 228),
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
             child: SingleChildScrollView(
@@ -137,7 +151,6 @@ class InsertVehicleCard extends StatelessWidget {
                                 licenseplt: licensepltController.text);
 
                             bloc.add(VehicleInsert(vehicle: vehicle));
-                            bloc.add(VehicleFetched());
                             Navigator.of(context).pop();
                           },
                           child: const Text(
@@ -147,12 +160,14 @@ class InsertVehicleCard extends StatelessWidget {
                         ),
                         TextButton(
                             onPressed: () {
-                              bloc.add(VehicleFetched());
                               Navigator.of(context).pop();
                             },
                             child: const Text(
                               "Fechar",
-                              style: TextStyle(color: Colors.red, fontSize: 22),
+                              style: TextStyle(
+                                color: Colors.red,
+                                fontSize: 22,
+                              ),
                             )),
                       ],
                     ),

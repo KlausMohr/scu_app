@@ -4,14 +4,14 @@ import 'package:scu_app/presentation/builders/bloc_builder/vehicle_list_builder.
 import 'package:scu_app/presentation/business_logic/vehicle/bloc/vehicle_bloc.dart';
 import 'package:scu_app/presentation/widgets/cards/insert_vehicle_card.dart';
 
-class Homescreen extends StatefulWidget {
-  const Homescreen({super.key});
+class VehicleListScreen extends StatefulWidget {
+  const VehicleListScreen({super.key});
 
   @override
-  State<Homescreen> createState() => _HomescreenState();
+  State<VehicleListScreen> createState() => _VehicleListScreenState();
 }
 
-class _HomescreenState extends State<Homescreen> {
+class _VehicleListScreenState extends State<VehicleListScreen> {
   late final VehicleBloc bloc;
 
   @override
@@ -30,6 +30,7 @@ class _HomescreenState extends State<Homescreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(),
       body: SafeArea(
         child: LayoutBuilder(
           builder: (context, constraints) {

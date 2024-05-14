@@ -1,8 +1,9 @@
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:scu_app/presentation/business_logic/vehicle/bloc/vehicle_bloc.dart";
+import "package:scu_app/presentation/screens/home_screen.dart";
+import "package:scu_app/presentation/screens/vehicle_list_screen.dart";
 import "package:scu_app/vehicle_observer.dart";
-import "presentation/homescreen.dart";
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -22,9 +23,14 @@ class ScuApp extends StatelessWidget {
           )
         ],
         child: MaterialApp(
+          title: "SCU APP",
           debugShowCheckedModeBanner: false,
-          darkTheme: ThemeData.dark(),
-          home: const Homescreen(),
+          // darkTheme: ThemeData.dark(),
+          initialRoute: '/',
+          routes: {
+            '/': (context) => const HomeScreen(),
+            '/vehicles': (context) => const VehicleListScreen(),
+          },
         ));
   }
 }

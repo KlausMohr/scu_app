@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:scu_app/data/implementatios/vehicle_repository.dart';
+import 'package:scu_app/data/implementatios/repositories/vehicle_repository.dart';
 import 'package:scu_app/data/models/vehicle_model.dart';
 part 'vehicle_event.dart';
 part 'vehicle_state.dart';
