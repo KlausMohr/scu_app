@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:scu_app/presentation/builders/bloc_builder/owner_list_builder.dart';
 import 'package:scu_app/presentation/business_logic/owner/bloc/owner_bloc.dart';
+import 'package:scu_app/presentation/widgets/cards/insert_owner_card.dart';
 
 class OwnerListScreen extends StatefulWidget {
   const OwnerListScreen({super.key});
